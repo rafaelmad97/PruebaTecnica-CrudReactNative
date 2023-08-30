@@ -1,7 +1,7 @@
 import { AppBar } from "@react-native-material/core";
 import Homepage from "./pages/homepage";
 import { View } from "react-native";
-import CarsState from "./context/carsContext";
+import UsersState from "./context/userContext";
 
 export default function App() {
   return (
@@ -14,11 +14,10 @@ export default function App() {
         justifyContent: "space-between",
       }}
     >
-      <AppBar title="Aplicacion de lista de carros" />
-
-      <CarsState>
+      <AppBar title="Listado de Usuarios" />
+      <UsersState>
         <Homepage />
-      </CarsState>
+      </UsersState>
     </View>
   );
 }
