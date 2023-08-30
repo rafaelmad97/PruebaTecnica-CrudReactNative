@@ -7,7 +7,7 @@ import {
   DialogHeader,
 } from "@react-native-material/core";
 import { View } from "react-native";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/userContext";
 
 export default function FormularioUsuario(props) {
@@ -18,6 +18,23 @@ export default function FormularioUsuario(props) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (props.userdata !== undefined) {
+      setNombre(props.userdata.name);
+      setApellido(props.userdata.lastname);
+      setEmail(props.userdata.email);
+      setUsername(props.userdata.username);
+      setPassword(props.userdata.password);
+    }
+  }, [
+    setNombre,
+    setApellido,
+    setEmail,
+    setUsername,
+    setPassword,
+    props.userdata !== undefined,
+  ]);
 
   const handleAgregarUsuario = () => {
     const userdata = {
@@ -32,9 +49,37 @@ export default function FormularioUsuario(props) {
       .agregarUsuario(userdata)
       .then(() => {
         console.log("Usuario Agregado");
+        handleCleanCampos();
         props.closeDialog();
       })
       .finally(userContext.fetchUsers);
+  };
+
+  const handleUpdateUsuario = () => {
+    const userdata = {
+      id: props.userdata.id,
+      name: nombre,
+      lastname: apellido,
+      email,
+      username,
+      password,
+    };
+    userContext
+      .actualizarUsuario(props.userdata.id, userdata)
+      .then(() => {
+        console.log("Usuario Actualizado");
+        handleCleanCampos();
+        props.closeDialog();
+      })
+      .finally(userContext.fetchUsers);
+  };
+
+  const handleCleanCampos = () => {
+    setNombre("");
+    setApellido("");
+    setEmail("");
+    setUsername("");
+    setPassword("");
   };
 
   return (
@@ -78,9 +123,17 @@ export default function FormularioUsuario(props) {
       <DialogActions>
         <Button
           variant="text"
-          onPress={handleAgregarUsuario}
+          onPress={
+            props.userdata !== undefined
+              ? handleUpdateUsuario
+              : handleAgregarUsuario
+          }
           color="primary"
-          title="Action"
+          title={
+            props.userdata !== undefined
+              ? "Actualizar Usuario"
+              : "Crear Usuario"
+          }
         />
         <Button
           variant="text"

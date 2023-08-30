@@ -8,12 +8,16 @@ import FormularioUsuario from "../components/FormularioUsuario";
 
 function Home() {
   const [formDialog, setFormDialog] = useState(false);
-  const openDialog = (event) => setFormDialog(true);
   const closeDialog = (event) => setFormDialog(false);
+  const openDialog = (event) => setFormDialog(true);
 
   return (
     <>
-      <FormularioUsuario formDialog={formDialog} closeDialog={closeDialog} />
+      <FormularioUsuario
+        formDialog={formDialog}
+        closeDialog={closeDialog}
+        userdata={undefined}
+      />
       <ListasComponents />
       <View
         style={{

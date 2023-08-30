@@ -39,11 +39,18 @@ export default function UsersState({ children }) {
     });
   }, []);
 
+  const actualizarUsuario = useCallback(async (id, user) => {
+    return axios.put(`https://localhost:7074/Users/${id}`, user).catch((e) => {
+      throw Error(e.message);
+    });
+  }, []);
+
   return (
     <UserContext.Provider
       value={{
         ...State,
         agregarUsuario,
+        actualizarUsuario,
         fetchUsers,
       }}
     >
