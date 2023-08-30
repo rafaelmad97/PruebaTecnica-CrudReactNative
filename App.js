@@ -1,15 +1,24 @@
-import { View, Text } from "react-native";
+import { AppBar } from "@react-native-material/core";
+import Homepage from "./pages/homepage";
+import { View } from "react-native";
+import CarsState from "./context/carsContext";
 
 export default function App() {
   return (
     <View
       style={{
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+        display: "flex",
+        flexDirection: "column",
+        Wrap: "nowrap",
+        justifyContent: "space-between",
       }}
     >
-      <Text>Universal React with Expo</Text>
+      <AppBar title="Aplicacion de lista de carros" />
+
+      <CarsState>
+        <Homepage />
+      </CarsState>
     </View>
   );
 }
