@@ -33,10 +33,17 @@ export default function UsersState({ children }) {
       });
   }, []);
 
+  const agregarUsuario = useCallback(async (user) => {
+    return axios.post("https://localhost:7074/Users", user).catch((e) => {
+      throw Error(e.message);
+    });
+  }, []);
+
   return (
     <UserContext.Provider
       value={{
         ...State,
+        agregarUsuario,
         fetchUsers,
       }}
     >

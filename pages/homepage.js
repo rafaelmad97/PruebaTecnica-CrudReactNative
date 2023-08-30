@@ -1,18 +1,10 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogHeader,
-  FAB,
-  Provider,
-  Text,
-} from "@react-native-material/core";
+import { FAB, Provider } from "@react-native-material/core";
 import ListasComponents from "../components/listas";
 
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useState } from "react";
 import { View } from "react-native";
+import FormularioUsuario from "../components/FormularioUsuario";
 
 function Home() {
   const [formDialog, setFormDialog] = useState(false);
@@ -21,29 +13,8 @@ function Home() {
 
   return (
     <>
-      <Dialog visible={formDialog}>
-        <DialogHeader title="Dialogo" />
-        <DialogContent>
-          <Text variant="body1">Opened Dialog</Text>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            variant="text"
-            onPress={closeDialog}
-            color="primary"
-            title="Action"
-          />
-          <Button
-            variant="text"
-            onPress={closeDialog}
-            color="secondary"
-            title="close"
-          />
-        </DialogActions>
-      </Dialog>
-
+      <FormularioUsuario formDialog={formDialog} closeDialog={closeDialog} />
       <ListasComponents />
-
       <View
         style={{
           display: "flex",
