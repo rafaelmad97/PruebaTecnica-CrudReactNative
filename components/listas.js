@@ -17,24 +17,6 @@ export default function ListasComponent() {
       style={{
         margin: "1em",
       }}
-    >
-      <View>
-        <Text variant="body1">Temperaturas</Text>
-
-        {data.map((weather) => (
-          <ListItem
-            title={weather.summary}
-            secondaryText={`La temperatura es : ${weather.temperatureC} C | ${weather.temperatureF} F  fue tomada el ${weather.date}  `}
-          />
-        ))}
-      </View>
-      <View>
-        <Text variant="body1">Lista de Carros</Text>
-
-        {carsContext.cars.map((car) => (
-          <ListItem title={car.name} />
-        ))}
-      </View>
-    </Box>
+    ></Box>
   );
 }
