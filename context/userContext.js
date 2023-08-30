@@ -45,12 +45,19 @@ export default function UsersState({ children }) {
     });
   }, []);
 
+  const eliminarUsuario = useCallback(async (id) => {
+    return axios.delete(`https://localhost:7074/Users/${id}`).catch((e) => {
+      throw Error(e.message);
+    });
+  }, []);
+
   return (
     <UserContext.Provider
       value={{
         ...State,
         agregarUsuario,
         actualizarUsuario,
+        eliminarUsuario,
         fetchUsers,
       }}
     >
